@@ -1,0 +1,92 @@
+body {
+    background: #a9ba9d;
+    margin: 1rem;
+    padding: 1rem;
+    max-width: 1100px;
+    margin: 2rem auto;
+    font-family: "Yeseva One", Yeseva One;
+    opacity: .9;
+  }
+  
+  .crumb {
+    align-items: right;
+    float: right;
+    margin-right: 1rem;
+    display: inline;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  ol {
+	padding-left: 0;
+}
+
+  .image {
+        position: relative;
+        width: 50%;
+        float: left;
+        height: 100%
+}
+
+.data {
+    position: relative;
+    display: flexbox;
+    width: 50%;
+    float: right;
+    height: 100%
+}
+
+#list {
+    background-color: #e7d5be;
+}
+
+#quoteButton {
+      background-color: #f8ece7;
+      padding: 12px;
+      font-weight: bold;
+  }
+
+#booksButton {
+      background-color: #f8ece7;
+      padding: 12px;
+      font-weight: bold;
+  }
+
+#favoritesButton {
+      background-color: #f8ece7;
+      padding: 12px;
+      font-weight: bold;
+  }
+
+#addButton {
+    background-color: #f8ece7;
+    padding: 6px;
+    font-weight: bold;
+}
+
+#favoriteButton {
+    background-color: #f8ece7;
+    padding: 6px;
+    font-weight: bold;
+}
+
+#deleteButton {
+    background-color: #f8ece7;
+    padding: 6px;
+    font-weight: bold;
+}
+
+  a {
+      float: right;
+      color: #000000;
+      font-size: 18px;
+  }
+  
+  a:visited {
+      color: #000000;
+      font-size: 18px;
+  }
+   
+  input {
+      display: flex;
+  }

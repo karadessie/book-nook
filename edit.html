@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Page</title>
+	<link href="index.css" rel="stylesheet">
+
+</head>
+<div class="image">
+<img src="https://i.pinimg.com/564x/1d/97/47/1d9747a8ccf296754ec45f037bf71508.jpg" height="664" width="345" frameborder="0" scrolling="no" ></img>
+</div>
+
+<body class="container">
+<div class="data">
+ 
+<a href="./index.html"><< Back </a>  
+
+<nav>
+    <ol>
+        <li class="crumb"><a href="./edit.html">Edit</a></li>
+        <li class="crumb"><a href="./index.html">Home</a></li>
+    </ol>
+</nav>
+
+<style>
+    input[type=text] {
+       background-color: #f8ece7;
+    }
+</style>
+
+<h2>Add a Book</h2>
+<form id="addBookInput">
+<input type="text" name="name" value="Name">
+<input type="text" name="author" value="Author">
+<input type="text" name="favorite" value="Favorite? True or False">
+<button id="addButton">Submit</button>
+</form>
+
+<h2>Favorite a Book</h2>
+<form id="favoriteBookInput">
+<input type="text" value="Name">
+<button id="favoriteButton">Submit</button>
+</form>
+
+<h2>Delete a Book</h2>
+<form id="deleteBookInput">
+<input type="text" value="Name">
+<button id="deleteButton">Submit</button>
+</form>
+
+<script>
+    document.getElementById("addButton").onclick = function () {
+      axios.get("http://localhost:4000/api/addBookInput/")
+          .then(function (response) {
+            const data = response.data;
+            alert(data);
+          });
+    };  
+ 
+   document.getElementById("favoriteButton").onclick = function () {
+     axios.get("http://localhost:4000/api/favoriteBookInput/")
+        .then(function (response) {
+           const data = response.data;
+           alert(data);
+          });
+  };  
+ 
+      document.getElementById("deleteButton").onclick = function () {
+      axios.get("http://localhost:4000/api/deleteBookInput/")
+          .then(function (response) {
+              const data = response.data;
+              alert(data);
+              });
+      };  
+
+    </script>  
+
+<h1>Have a great day!</h1>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    </div>
+  </body>
+</html>

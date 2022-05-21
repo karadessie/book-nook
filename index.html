@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link href="index.css" rel="stylesheet">
+
+</head>
+    <div class="image">
+    <img src="https://i.pinimg.com/564x/32/c3/25/32c32595fed7114f09290d8f34a9ce9c.jpg" height="664" width="345" frameborder="0" scrolling="no" ></img> 
+    </div>
+    <body class="container">
+    <div class="data">
+        <nav>
+            <ol>
+                <li class="crumb"><a href="./edit.html">Edit</a></li>
+                <li class="crumb"><a href="./index.html">Home</a></li>
+            </ol>
+        </nav>
+
+    <h1>KARA'S BOOK NOOK</h1>
+
+        <button id="quoteButton">Featured Quote</button>
+        <button id="booksButton">All Books</button>
+        <button id="favoritesButton">Favorite Books</button>
+
+        <text rows="20" cols="42"></text>
+
+        <script>
+          document.getElementById("quoteButton").onclick = function () {
+            axios.get("http://localhost:4000/api/quote/")
+                .then(function (response) {
+                  const data = response.data;
+                  alert(data);
+                });
+          };    
+        
+         document.getElementById("booksButton").onclick = function () {
+           axios.get("http://localhost:4000/api/books/")
+              .then(function (response) {
+                 const data = response.data;
+                 alert(data);
+                });
+        };  
+  
+        document.getElementById("favoritesButton").onclick = function () {
+           axios.get("http://localhost:4000/api/books/")
+                .then(function (response) {
+                    const data = response.data;
+                    alert(data);
+                    });
+        };  
+        </script>    
+      </div> 
+    </body>
+
+       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+       <script src="index.js"></script>
+       
+</html>
