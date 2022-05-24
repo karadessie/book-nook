@@ -46,14 +46,14 @@ body {
       border-radius: 12px;
   }
 
-#bookListButton {
+#featuredBookButton {
       background-color: #ebcba1;
       padding: 12px;
       font-weight: bold;
       border-radius: 12px;
   }
 
-#favoriteListButton {
+#bookCountButton {
       background-color: #ebcba1;
       padding: 12px;
       font-weight: bold;

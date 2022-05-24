@@ -23,10 +23,8 @@
     <h1>KARA'S BOOK NOOK</h1>
 
         <button id="quoteButton">Featured Quote</button>
-        <button id="bookListButton">All Books</button>
-        <button id="favoriteListButton">Favorite Books</button>
-
-        <text rows="60" cols="44"></text>
+        <button id="featuredBookButton">Featured Book</button>
+        <button id="bookCountButton">Book Count</button>
 
         <script>
           document.getElementById("quoteButton").onclick = function () {
@@ -37,15 +35,15 @@
                 });
           };    
         
-         document.getElementById("booksButton").onclick = function () {
-           axios.get("http://localhost:4000/api/books/")
+         document.getElementById("featuredBookButton").onclick = function () {
+           axios.get("http://localhost:4000/api/featured/")
               .then(function (response) {
                  const data = response.data;
                  alert(data);
                 });
         };  
   
-        document.getElementById("favoritesButton").onclick = function () {
+        document.getElementById("bookCountButton").onclick = function () {
            axios.get("http://localhost:4000/api/books/")
                 .then(function (response) {
                     const data = response.data;
@@ -55,8 +53,5 @@
         </script>    
       </div> 
     </body>
-
-       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-       <script src="index.js"></script>
        
 </html>

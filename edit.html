@@ -3,6 +3,7 @@
 <head>
     <title>Edit Page</title>
 	<link href="index.css" rel="stylesheet">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 <div class="image">
@@ -36,48 +37,41 @@
 </form>
 
 <h2>Favorite a Book</h2>
-<form id="favoriteBookInput">
-<input type="text" value="Name">
+<input id="favoriteBookInput" type="text" value="Name">
 <button id="favoriteButton">Submit</button>
-</form>
 
 <h2>Delete a Book</h2>
-<form id="deleteBookInput">
-<input type="text" value="Name">
+<input id="deleteBookInput" type="text" value="Name">
 <button id="deleteButton">Submit</button>
-</form>
 
 <script>
     document.getElementById("addButton").onclick = function () {
       axios.get("http://localhost:4000/api/addBookInput/")
           .then(function (response) {
             const data = response.data;
-            alert(data);
+            console.log(data);
           });
     };  
  
    document.getElementById("favoriteButton").onclick = function () {
-     axios.get("http://localhost:4000/api/favoriteBookInput/")
+     axios.get("http://localhost:4000/api/:favoriteBookInput/")
         .then(function (response) {
            const data = response.data;
-           alert(data);
+           console.log(data);
           });
   };  
  
-      document.getElementById("deleteButton").onclick = function () {
-      axios.get("http://localhost:4000/api/deleteBookInput/")
+    document.getElementById("deleteButton").onclick = function () {
+      axios.get("http://localhost:4000/api/:deleteBookInput/")
           .then(function (response) {
               const data = response.data;
-              alert(data);
+              console.log(data);
               });
       };  
 
     </script>  
 
 <h1>Have a great day!</h1>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 
     </div>
   </body>

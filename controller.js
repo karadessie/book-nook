@@ -46,26 +46,18 @@ module.exports = {
           .catch((err) => console.log("error seeding DB", err));
     },
 
-    getBooks: (req, res) => {
-        const bookList = req.params.id
-        sequelize.query(`select * from books`)
+    bookCount: (req, res) => {
+        sequelize.query(`select * from books
+         set bookCount = 0
+         while bookCount <= books.length
+         set bookCount = bookCount + 1
+        `)
         .then(() => {
             res.send.data
-            console.log("Selected All Books!");
+            console.log("Books Counted!");
             res.sendStatus(200);
         })
-        .catch((err) => console.log("error getting all books", err));
-    },
-
-    getFavorites: (req, res) => {
-        sequelize.query(`select from books
-        where favorite = True`)
-        .then(() => {
-            res.send.data
-            console.log("Selected Favorite Books!");
-            res.sendStatus(200);
-        })
-        .catch((err) => console.log("error getting favorite books", err));
+        .catch((err) => console.log("error counting books", err));
     },
     
     addBook: (req, res) => {
@@ -87,7 +79,7 @@ module.exports = {
         const favoriteBookID = req.params.id
         sequelize.query(`update books
         set favorite = True
-        where book_id = ${favoriteBookID}`)
+        where name = ${favoriteBookID}`)
         .then(() => {
             console.log("Book Favorited!");
             res.sendStatus(200);
@@ -96,10 +88,10 @@ module.exports = {
     },
 
     deleteBook: (req, res) => {
-        const deleteBookID = req.params.id
-        console.log(deleteBookID)
+        const deleteBookName = req.params.id
+        console.log(deleteBookName)
         sequelize.query(`
-        delete from books where book_id = ${deleteBookID}`)
+        delete from books where name = ${deleteBookName}`)
         .then(() => {
             console.log("Book Deleted!");
             res.sendStatus(200);

@@ -2,10 +2,14 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const {seed, getBooks, getFavorites, addBook, favoriteBook, deleteBook} = require('./controller.js');
+const {seed, bookCount, addBook, favoriteBook, deleteBook} = require('./controller.js');
 
 app.use(cors());
 app.use(express.json()); 
+
+function handleSubmit (e) {
+	e.preventDufault()
+}
 
 app.get("/api/quote", (req, res) => {
   const quotes = ["I do believe something very magical can happen when you read a good book... J.K. Rowling",
@@ -21,11 +25,20 @@ app.get("/api/quote", (req, res) => {
   res.status(200).send(randomQuote);    
 });
 
+app.get("/api/featured", (req, res) => {
+	const bookNames = ["The Hiding Place", "Awakenings", "Catch_22",
+		"The Peter Principle", "A Tale of Two Cities", "The Chosen", "A Tree Grows in Brooklyn",
+		"The Omnivore's Dilemma", "Charlie and the Chocolate Factory", "Tom Sawyer", "Huckleberry Finn", "Grendel"]
+	let randomIndex = Math.floor(Math.random() * bookNames.length);
+	let randomBook = bookNames[randomIndex];
+  
+	res.status(200).send(randomBook);    
+  });
+
 app.post('/seed', seed)
-app.get('/books', getBooks);
-app.get('/books', getFavorites);
-app.post('/books', addBook)
-app.put('/books/:book_id', favoriteBook)
-app.delete('/books/:book_id', deleteBook)
+app.get('/books', bookCount);
+app.post('/books', addBook);
+app.put('/books/:id', favoriteBook);
+app.delete('/books/:id', deleteBook);
 
 app.listen(process.env.SERVER_PORT, () => console.log(`up on 4000`))
