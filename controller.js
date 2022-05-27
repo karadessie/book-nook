@@ -20,7 +20,7 @@ module.exports = {
             
                 create table books (
                   book_id serial primary key, 
-                  name varchar,
+                  name varchar not null,
                   author varchar,
                   favorite Boolean
               );
