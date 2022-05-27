@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { response } = require('express');
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
@@ -25,18 +26,18 @@ module.exports = {
               );
     
                 insert into books (name, author, favorite)
-                    values ('The Hiding Place', 'Corrie Ten Boom', True),
-                    ('Awakenings', 'Oliver Sacks', True),
-                    ('Catch_22', 'Joseph Heller', False),
-                    ('The Peter Principle', 'Lawrence J. Peter', False),
-                    ('A Tale of Two Cities', 'Charles Dickens', False),
-                    ('The Chosen', 'Chaim Potok', False),
-                    ('A Tree Grows in Brooklyn', 'Betty Smith', True),
-                    ('The Omnivore’s Dilemma', 'Michael Pollan', False),
-                    ('Charlie and the Chocolate Factory', 'Roald Dahl', False),
-                    ('Tom Sawyer', 'Mark Twain', False), 
-                    ('Huckleberry Finn', 'Mark Twain', False), 
-                    ('Grendel', 'John Gardner', False);  
+                    values ('The Hiding Place', 'Corrie Ten Boom', true),
+                    ('Awakenings', 'Oliver Sacks', true),
+                    ('Catch_22', 'Joseph Heller', false),
+                    ('The Peter Principle', 'Lawrence J. Peter', false),
+                    ('A Tale of Two Cities', 'Charles Dickens', false),
+                    ('The Chosen', 'Chaim Potok', false),
+                    ('A Tree Grows in Brooklyn', 'Betty Smith', true),
+                    ('The Omnivore’s Dilemma', 'Michael Pollan', false),
+                    ('Charlie and the Chocolate Factory', 'Roald Dahl', false),
+                    ('Tom Sawyer', 'Mark Twain', false), 
+                    ('Huckleberry Finn', 'Mark Twain', false), 
+                    ('Grendel', 'John Gardner', false);  
             `
           )
           .then(() => {
@@ -47,15 +48,11 @@ module.exports = {
     },
 
     bookCount: (req, res) => {
-        sequelize.query(`select * from books
-         set bookCount = 0
-         while bookCount <= books.length
-         set bookCount = bookCount + 1
-        `)
-        .then(() => {
-            res.send.data
-            console.log("Books Counted!");
-            res.sendStatus(200);
+         sequelize.query(`select name from books
+         where name is not null`, { plain: false })
+        .then(result =>  {
+            console.log(result)
+            res.status(200).send(result[0])
         })
         .catch((err) => console.log("error counting books", err));
     },
@@ -67,7 +64,7 @@ module.exports = {
        console.log(newName, newAuthor, newFavorite)
        sequelize.query(`
        insert into books (name, author, favorite)
-       values  ('${newName}', ${newAuthor}, ${newFavorite})`)
+       values  ('${newName}', '${newAuthor}', ${newFavorite})`)
        .then(() => {
             console.log("Book Added!");
             res.sendStatus(200)
@@ -76,10 +73,10 @@ module.exports = {
     },
 
     favoriteBook: (req, res) => {
-        const favoriteBookID = req.params.id
+        const favoriteBookName = req.params.id
         sequelize.query(`update books
-        set favorite = True
-        where name = ${favoriteBookID}`)
+        set favorite = true
+        where name = '${favoriteBookName}'`)
         .then(() => {
             console.log("Book Favorited!");
             res.sendStatus(200);
@@ -91,7 +88,7 @@ module.exports = {
         const deleteBookName = req.params.id
         console.log(deleteBookName)
         sequelize.query(`
-        delete from books where name = ${deleteBookName}`)
+        delete from books where name = '${deleteBookName}'`)
         .then(() => {
             console.log("Book Deleted!");
             res.sendStatus(200);

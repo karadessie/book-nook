@@ -3,12 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const {seed, bookCount, addBook, favoriteBook, deleteBook} = require('./controller.js');
+const req = require('express/lib/request');
 
 app.use(cors());
 app.use(express.json()); 
 
 function handleSubmit (e) {
 	e.preventDufault()
+
 }
 
 app.get("/api/quote", (req, res) => {
@@ -36,9 +38,9 @@ app.get("/api/featured", (req, res) => {
   });
 
 app.post('/seed', seed)
-app.get('/books', bookCount);
-app.post('/books', addBook);
-app.put('/books/:id', favoriteBook);
-app.delete('/books/:id', deleteBook);
+app.get('/api/books', bookCount);
+app.post('/api/books', addBook);
+app.put('/api/books/:id', favoriteBook);
+app.delete('/api/books/:id', deleteBook);
 
 app.listen(process.env.SERVER_PORT, () => console.log(`up on 4000`))

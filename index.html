@@ -43,13 +43,15 @@
                 });
         };  
   
-        document.getElementById("bookCountButton").onclick = function () {
+         document.getElementById("bookCountButton").onclick = function () {
            axios.get("http://localhost:4000/api/books/")
-                .then(function (response) {
-                    const data = response.data;
-                    alert(data);
+                .then(result => {
+                    const resultNames = (result)
+                    console.log(resultNames.data)
+                    alert(resultNames.data.length);
                     });
         };  
+
         </script>    
       </div> 
     </body>
